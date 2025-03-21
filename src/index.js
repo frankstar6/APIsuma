@@ -4,7 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
 
-app.set('port', process.env.PORT || 4000);
+const PORT = process.env.PORT || 3001;
 app.set('json spaces', 2); 
 
 // Middleware
