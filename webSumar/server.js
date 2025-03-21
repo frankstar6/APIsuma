@@ -1,32 +1,20 @@
 const express = require('express');
+const app = express();
 const cors = require('cors');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// Ruta para sumar números
-app.post('/sumarWeb', (req, res) => {
+app.post('/sumar', (req, res) => {
     const { num1, num2 } = req.body;
-
-    // Validar entrada
-    if (typeof num1 !== 'number' || typeof num2 !== 'number') {
-        return res.status(400).json({ error: "Los valores deben ser números" });
+    if (isNaN(num1) || isNaN(num2)) {
+        return res.status(400).json({ error: "Datos inválidos" });
     }
-
     const resultado = num1 + num2;
     res.json({ resultado });
 });
 
-// Mantener activa la API con un endpoint de prueba
-app.get('/', (req, res) => {
-    res.send('API de suma funcionando');
-});
-
-// Iniciar servidor
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor en ejecución en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
