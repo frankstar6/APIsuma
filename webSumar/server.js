@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 // Ruta para sumar números
-app.post('/sumar', (req, res) => {
+app.post('/sumarWeb', (req, res) => {
     const { num1, num2 } = req.body;
 
     // Validar entrada
